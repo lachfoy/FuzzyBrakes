@@ -8,7 +8,7 @@ class LeadCar:
         self.pos = rng.randint(1, 1000) #Lead car will be starting somewhere randomly from 1 to 1000
 
     def updatePos(self):
-        self.pos += self.speed
+        self.pos += self.speed / 30
 
     def printStatus(self):
         print("Lead car speed: " + str(self.speed))
@@ -22,13 +22,13 @@ class TargetCar:
         self.posFromLead = (self.leadCar.pos - self.pos)
 
     def updateSpeed(self, brakeStrength):
-        if brakeStrength != 0:
-            self.speed -= max(round((brakeStrength / 4), 2), 0) #Car cannot go below 0 in speed
+        if brakeStrength > 1:
+            self.speed -= max(round((brakeStrength / 4), 2), 0) / 30 # Car cannot go below 0 in speed
         else:
-            self.speed += 1
+            self.speed += 2 / 30 # press the acellerator
 
     def updatePos(self):
-        self.pos += self.speed
+        self.pos += self.speed / 30
         self.posFromLead = (self.leadCar.pos - self.pos)
 
     def printStatus(self):

@@ -5,7 +5,7 @@ import cars
 pygame.init()
 
 # Set up the drawing window
-screen = pygame.display.set_mode([500, 500])
+screen = pygame.display.set_mode([640, 480])
 clock = pygame.time.Clock()
 
 font_name = pygame.font.match_font('arial')
@@ -34,11 +34,13 @@ while running:
     # Draw screen
     screen.fill((255, 255, 255))
 
-    line = 32
-    drawText(screen, "Tickrate: " + str(int(clock.get_fps())), 32, 0, 0)
-    drawText(screen, "Speed: " + str(targetCar.speed), 32, 0, 1 * line)
-    drawText(screen, "Distance: " + str(targetCar.posFromLead), 32, 0, 2 * line)
-    drawText(screen, "Brake: " + str(brakeStrength), 32, 0, 3 * line)
+    line = 40
+    pad = 4
+    drawText(screen, "Tickrate: "       + str(int(clock.get_fps())),    32, pad, pad)
+    drawText(screen, "Target Speed: "   + str(targetCar.speed),         32, pad, 1 * line + pad)
+    drawText(screen, "Lead Speed: "     + str(leadCar.speed),           32, pad, 2 * line + pad)
+    drawText(screen, "Distance: "       + str(targetCar.posFromLead),   32, pad, 3 * line + pad)
+    drawText(screen, "Brake: "          + str(brakeStrength),           32, pad, 4 * line + pad)
 
     # Did the user click the window close button?
     for event in pygame.event.get():
@@ -50,5 +52,3 @@ while running:
 
 # Done! Time to quit.
 pygame.quit()
-
-
