@@ -4,8 +4,8 @@ import random as rng
 
 class LeadCar:
     def __init__(self):
-        self.speed = min(rng.randint(1, 90), 90) #Lead car can only go a maximum possible speed of 90
-        self.pos = rng.randint(1, 1000) #Lead car will be starting somewhere randomly from 1 to 1000
+        self.speed = min(rng.randint(1, 90), 90) # Lead car can only go a maximum possible speed of 90
+        self.pos = rng.randint(1, 1000) # Lead car will be starting somewhere randomly from 1 to 1000
 
     def updatePos(self):
         self.pos += self.speed / 30
@@ -16,16 +16,19 @@ class LeadCar:
 
 class TargetCar:
     def __init__(self, leadCar: LeadCar):
-        self.speed = min(rng.randint(1, 60), 130) #Target car can only go a maximum possible speed of 130 and the fastest it can start at is 60
-        self.leadCar = leadCar #Get a reference to the car in front
-        self.pos = rng.randint(0, leadCar.pos - 1) #Lead car will be starting somewhere randomly BEHIND the car in front
+        self.speed = min(rng.randint(1, 60), 130) # Target car can only go a maximum possible speed of 130 and the fastest it can start at is 60
+        #self.acceleration = 0
+        self.leadCar = leadCar # Get a reference to the car in front
+        self.pos = rng.randint(0, leadCar.pos - 1) # Lead car will be starting somewhere randomly BEHIND the car in front
         self.posFromLead = (self.leadCar.pos - self.pos)
 
     def updateSpeed(self, brakeStrength):
         if brakeStrength > 1:
+            #self.acceleration = 0
             self.speed -= max(round((brakeStrength / 4), 2), 0) / 30 # Car cannot go below 0 in speed
         else:
-            self.speed += 2 / 30 # press the acellerator
+            #self.acceleration += 1
+            self.speed += 1 # Press the accelerator
 
     def updatePos(self):
         self.pos += self.speed / 30
